@@ -1,0 +1,16 @@
+# Ignore Python virtual environment
+.env/
+
+# Byte-compiled / cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Environment variable files (optional)
+.env*
