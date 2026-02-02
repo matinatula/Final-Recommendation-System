@@ -1,0 +1,353 @@
+2026-02-02 17:26:31,164 - __main__ - INFO - Starting Recommendation Worker Service
+2026-02-02 17:26:31,164 - __main__ - INFO - Configuration: MAX_WORKERS=1, RECOMMENDATIONS_PER_USER=20, INTERVAL_HOURS=6
+2026-02-02 17:26:31,168 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-02 17:26:31,168 - __main__ - INFO - Scheduled jobs:
+2026-02-02 17:26:31,168 - __main__ - INFO -   - Generate user recommendations (recorereID: recommendation_job) - Next run: 2026-02-02 23:26:31.168630+05:45
+2026-02-02 17:26:31,168 - __main__ - INFO - Running initial recommendation job on startup...
+2026-02-02 17:26:31,168 - __main__ - INFO - ================================================================================
+2026-02-02 17:26:31,168 - __main__ - INFO - RECOMMENDATION JOB STARTED
+2026-02-02 17:26:31,168 - __main__ - INFO - ================================================================================
+2026-02-02 17:26:31,169 - __main__ - INFO - Initializing hybrid recommender system...
+2026-02-02 17:26:31,231 - __main__ - ERROR - Failed to initialize recommender: (psycopg2.ProgrammingError) invalid dsn: invalid connection option "statusColor"
+
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3309, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 711, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 175, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 673, in __init__
+    self.__connect()
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 899, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/psycopg2/__init__.py", line 121, in connect
+    dsn = _ext.make_dsn(dsn, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/psycopg2/extensions.py", line 167, in make_dsn
+    parse_dsn(dsn)
+psycopg2.ProgrammingError: invalid dsn: invalid connection option "statusColor"
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/matinatuladhar/Desktop/final_attempt/recommenderWorker.py", line 53, in initialize_recommender
+    self.hybrid_recommender.load_and_train()
+  File "/Users/matinatuladhar/Desktop/final_attempt/hybrid.py", line 38, in load_and_train
+    self.content_recommender.load_features()
+  File "/Users/matinatuladhar/Desktop/final_attempt/content_based.py", line 23, in load_features
+    features = self.db.query(SongFeature).all()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2239, in _execute_internal
+    conn = self._connection_for_bind(bind)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2108, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in _connection_for_bind
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+           ^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3285, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3309, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 711, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 175, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 673, in __init__
+    self.__connect()
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 899, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/psycopg2/__init__.py", line 121, in connect
+    dsn = _ext.make_dsn(dsn, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/psycopg2/extensions.py", line 167, in make_dsn
+    parse_dsn(dsn)
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) invalid dsn: invalid connection option "statusColor"
+
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-02-02 17:26:31,242 - __main__ - ERROR - Failed to initialize recommender. Aborting job.
+2026-02-02 17:26:31,242 - __main__ - INFO - Job completed at 2026-02-02 11:41:31.242295+00:00
+2026-02-02 17:26:31,242 - __main__ - INFO - Worker is running. Press Ctrl+C to exit.
+2026-02-02 17:26:31,242 - apscheduler.scheduler - INFO - Added job "Generate user recommendations" to job store "default"
+2026-02-02 17:26:31,242 - apscheduler.scheduler - INFO - Scheduler started
+2026-02-02 17:28:30,127 - __main__ - INFO - Shutting down scheduler...
+2026-02-02 17:28:30,132 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2026-02-02 17:28:30,134 - __main__ - INFO - Worker cleanup completed
+2026-02-02 17:28:30,134 - __main__ - INFO - Worker service stopped
+2026-02-02 17:28:35,935 - __main__ - INFO - Starting Recommendation Worker Service
+2026-02-02 17:28:35,935 - __main__ - INFO - Configuration: MAX_WORKERS=1, RECOMMENDATIONS_PER_USER=20, INTERVAL_HOURS=6
+2026-02-02 17:28:35,938 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-02 17:28:35,938 - __main__ - INFO - Scheduled jobs:
+2026-02-02 17:28:35,938 - __main__ - INFO -   - Generate user recommendations (recorereID: recommendation_job) - Next run: 2026-02-02 23:28:35.937941+05:45
+2026-02-02 17:28:35,938 - __main__ - INFO - Running initial recommendation job on startup...
+2026-02-02 17:28:35,938 - __main__ - INFO - ================================================================================
+2026-02-02 17:28:35,938 - __main__ - INFO - RECOMMENDATION JOB STARTED
+2026-02-02 17:28:35,938 - __main__ - INFO - ================================================================================
+2026-02-02 17:28:35,938 - __main__ - INFO - Initializing hybrid recommender system...
+2026-02-02 17:28:36,761 - __main__ - ERROR - Failed to initialize recommender: (psycopg2.OperationalError) connection to server at "ep-rapid-grass-a1q8c1uo-pooler.ap-southeast-1.aws.neon.tech" (2406:da18:94d:820a:7802:44a:8047:9bf2), port 5432 failed: ERROR:  unsupported startup parameter in options: statement_timeout. Please use unpooled connection or remove this parameter from the startup package. More details: https://neon.tech/docs/connect/connection-errors#unsupported-startup-parameter
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3309, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 711, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 175, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 673, in __init__
+    self.__connect()
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 899, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "ep-rapid-grass-a1q8c1uo-pooler.ap-southeast-1.aws.neon.tech" (2406:da18:94d:820a:7802:44a:8047:9bf2), port 5432 failed: ERROR:  unsupported startup parameter in options: statement_timeout. Please use unpooled connection or remove this parameter from the startup package. More details: https://neon.tech/docs/connect/connection-errors#unsupported-startup-parameter
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/matinatuladhar/Desktop/final_attempt/recommenderWorker.py", line 53, in initialize_recommender
+    self.hybrid_recommender.load_and_train()
+  File "/Users/matinatuladhar/Desktop/final_attempt/hybrid.py", line 38, in load_and_train
+    self.content_recommender.load_features()
+  File "/Users/matinatuladhar/Desktop/final_attempt/content_based.py", line 23, in load_features
+    features = self.db.query(SongFeature).all()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2239, in _execute_internal
+    conn = self._connection_for_bind(bind)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2108, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in _connection_for_bind
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1187, in _connection_for_bind
+    conn = bind.connect()
+           ^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3285, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3309, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 711, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 175, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 673, in __init__
+    self.__connect()
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 899, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matinatuladhar/miniforge3/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "ep-rapid-grass-a1q8c1uo-pooler.ap-southeast-1.aws.neon.tech" (2406:da18:94d:820a:7802:44a:8047:9bf2), port 5432 failed: ERROR:  unsupported startup parameter in options: statement_timeout. Please use unpooled connection or remove this parameter from the startup package. More details: https://neon.tech/docs/connect/connection-errors#unsupported-startup-parameter
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-02 17:28:36,776 - __main__ - ERROR - Failed to initialize recommender. Aborting job.
+2026-02-02 17:28:36,776 - __main__ - INFO - Job completed at 2026-02-02 11:43:36.776404+00:00
+2026-02-02 17:28:36,776 - __main__ - INFO - Worker is running. Press Ctrl+C to exit.
+2026-02-02 17:28:36,776 - apscheduler.scheduler - INFO - Added job "Generate user recommendations" to job store "default"
+2026-02-02 17:28:36,776 - apscheduler.scheduler - INFO - Scheduler started
+2026-02-02 17:36:24,052 - __main__ - INFO - Shutting down scheduler...
+2026-02-02 17:36:24,057 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2026-02-02 17:36:24,058 - __main__ - INFO - Worker cleanup completed
+2026-02-02 17:36:24,058 - __main__ - INFO - Worker service stopped
+2026-02-02 17:41:35,423 - __main__ - INFO - Starting Recommendation Worker Service
+2026-02-02 17:41:35,423 - __main__ - INFO - Configuration: MAX_WORKERS=1, RECOMMENDATIONS_PER_USER=20, INTERVAL_HOURS=6
+2026-02-02 17:41:35,427 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-02 17:41:35,427 - __main__ - INFO - Scheduled jobs:
+2026-02-02 17:41:35,427 - __main__ - INFO -   - Generate user recommendations (ID: recommendation_job) - Next run: 2026-02-02 23:41:35.427664+05:45
+2026-02-02 17:41:35,427 - __main__ - INFO - Running initial recommendation job on startup...
+2026-02-02 17:41:35,427 - __main__ - INFO - ================================================================================
+2026-02-02 17:41:35,428 - __main__ - INFO - RECOMMENDATION JOB STARTED
+2026-02-02 17:41:35,428 - __main__ - INFO - ================================================================================
+2026-02-02 17:41:35,428 - __main__ - INFO - Initializing hybrid recommender system...
+2026-02-02 17:41:39,270 - __main__ - INFO - Hybrid recommender initialized successfully
+2026-02-02 17:41:39,989 - __main__ - INFO - Found 2 users in database
+2026-02-02 17:41:39,989 - __main__ - INFO - Starting parallel processing for 2 users with 1 workers
+2026-02-02 17:41:39,989 - __main__ - INFO - Generating recommendations for user: vH8J3NOUAQRsqJzSgiOGiqgSekisnH9X
+2026-02-02 17:41:40,697 - __main__ - WARNING - No recommendations generated for user: vH8J3NOUAQRsqJzSgiOGiqgSekisnH9X
+2026-02-02 17:41:40,698 - __main__ - INFO - Generating recommendations for user: HUX7PHMbmIftm7b57toEBbDQNDoMsENH
+2026-02-02 17:41:43,416 - __main__ - INFO - Successfully generated 20 recommendations for user: HUX7PHMbmIftm7b57toEBbDQNDoMsENH
+2026-02-02 17:41:43,417 - __main__ - INFO - ================================================================================
+2026-02-02 17:41:43,418 - __main__ - INFO - RECOMMENDATION JOB COMPLETED
+2026-02-02 17:41:43,418 - __main__ - INFO - Total Users: 2
+2026-02-02 17:41:43,418 - __main__ - INFO - Successful: 1
+2026-02-02 17:41:43,418 - __main__ - INFO - Failed: 1
+2026-02-02 17:41:43,418 - __main__ - INFO - Total Recommendations Generated: 20
+2026-02-02 17:41:43,418 - __main__ - INFO - Duration: 3.43 seconds
+2026-02-02 17:41:43,419 - __main__ - WARNING - Failed users (1):
+2026-02-02 17:41:43,419 - __main__ - WARNING -   - vH8J3NOUAQRsqJzSgiOGiqgSekisnH9X: Unknown error
+2026-02-02 17:41:43,419 - __main__ - INFO - ================================================================================
+2026-02-02 17:41:43,419 - __main__ - INFO - Job completed at 2026-02-02 11:56:43.419489+00:00
+2026-02-02 17:41:43,419 - __main__ - INFO - Worker is running. Press Ctrl+C to exit.
+2026-02-02 17:41:43,420 - apscheduler.scheduler - INFO - Added job "Generate user recommendations" to job store "default"
+2026-02-02 17:41:43,420 - apscheduler.scheduler - INFO - Scheduler started
+2026-02-02 17:42:36,825 - __main__ - INFO - Shutting down scheduler...
+2026-02-02 17:42:36,827 - apscheduler.scheduler - INFO - Scheduler has been shut down
