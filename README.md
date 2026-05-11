@@ -562,27 +562,3 @@ evaluator.print_comparison_table(results)
 
 ---
 
-## 👤 Author
-
-**Your Name**  
-Final Year Project - [Your University]  
-[Your Email] | [LinkedIn] | [GitHub]
-
----
-
-## 📄 License
-
-This project is part of academic coursework and is available for educational purposes.
-
----
-
-## 🙏 Acknowledgments
-
-- Claude AI for pair programming and debugging assistance
-- Last.fm for providing free music data API
-- The `implicit` library maintainers
-- My project team members
-
----
-
-**Built with ❤️ and lots of debugging** 🐛➡️✨
