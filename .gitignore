@@ -15,4 +15,3 @@ dist/
 # Environment variable files (optional)
 .env*
 
-.vscode
