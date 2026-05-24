@@ -15,5 +15,4 @@ dist/
 # Environment variable files (optional)
 .env*
 
-combine_files.py
-combined_code.py
+.vscode
